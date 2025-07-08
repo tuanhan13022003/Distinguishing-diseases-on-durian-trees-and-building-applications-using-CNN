@@ -23,7 +23,7 @@ const OrderDetailDialogAdmin = ({ order, onClose, onUpdate }) => {
       total_price: order.total_price
     });
     onClose();
-    if (onStatusUpdated) onStatusUpdated(); // ✅ gọi callback nếu được truyền vào
+    if (onStatusUpdated) onStatusUpdated();
   };
 
   if (!order) return null;

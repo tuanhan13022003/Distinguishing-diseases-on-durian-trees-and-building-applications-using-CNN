@@ -57,7 +57,6 @@ function CardPageManagement() {
       if (currentUser) {
         const userId = localStorage.getItem('user_id');
         const response = await dispatch(getAllCartAPI(userId)).unwrap();
-        console.log('🚀 ~ Giỏ hàng:', response.items);
         setCartItems(response.items || []);
 
         const initialQuantities = {};
@@ -67,8 +66,8 @@ function CardPageManagement() {
         setQuantities(initialQuantities);
       }
     } catch (error) {
-      console.error('❌ Lỗi khi lấy giỏ hàng:', error);
-      toast.error('❌ Không thể tải giỏ hàng. Vui lòng thử lại.');
+      console.error('Lỗi khi lấy giỏ hàng:', error);
+      toast.error('Không thể tải giỏ hàng. Vui lòng thử lại.');
     }
   };
 
@@ -76,25 +75,19 @@ function CardPageManagement() {
     return price * quantity
   }
 
-  //   // Tính tổng tiền của giỏ hàng
-  //   const totalAmount = cartItems.reduce((sum, item) => {
-  //     return sum + calculateSubtotal(item.medicine.price, quantities[item.medicine.medicine_id] || 1)
-  //   }, 0)
-  // ✅ Xử lý chọn sản phẩm
   const handleSelectItem = (itemId) => {
     setSelectedItems((prev) =>
       prev.includes(itemId) ? prev.filter((id) => id !== itemId) : [...prev, itemId]
     );
-    console.log('📝 ~ Danh sách sản phẩm đã chọn:', selectedItems);
   };
 
-  // 🔄 Kiểm tra sản phẩm đã chọn
+
   const isSelected = (itemId) => selectedItems.includes(itemId);
 
-  // 📝 Gọi API thanh toán
+
   const handleCheckout = async () => {
     if (selectedItems.length === 0) {
-      toast.error('❌ Vui lòng chọn ít nhất một sản phẩm.');
+      toast.error(' Vui lòng chọn ít nhất một sản phẩm.');
       return;
     }
 
@@ -102,19 +95,17 @@ function CardPageManagement() {
       const userId = localStorage.getItem('user_id');
       await dispatch(checkoutCartAPI({ userId: parseInt(userId), selectedItems })).unwrap();
 
-      // Hiển thị thông báo thành công
-      alert('✅ Đặt hàng thành công!');
 
-      // Làm mới giỏ hàng sau khi thanh toán
+      alert('Đặt hàng thành công!');
+
       setSelectedItems([]);
       await fetchCart();
     } catch (error) {
-      console.error('❌ Lỗi khi thanh toán:', error);
-      toast.error('❌ Thanh toán thất bại.');
+      console.error('Lỗi khi thanh toán:', error);
+      toast.error('Thanh toán thất bại.');
     }
   };
 
-  // ✏️ Cập nhật số lượng sản phẩm
   const handleQuantityChange = async (itemId, value) => {
     const newValue = parseInt(value) || 1;
     setQuantities((prev) => ({
@@ -129,28 +120,24 @@ function CardPageManagement() {
           item.medicine.medicine_id === itemId ? { ...item, quantity: newValue } : item
         )
       );
-      toast.success('✅ Cập nhật số lượng thành công!');
+      toast.success('Cập nhật số lượng thành công!');
     } catch (error) {
-      console.error('❌ Lỗi khi cập nhật số lượng:', error);
-      toast.error('❌ Không thể cập nhật số lượng.');
+      console.error('Lỗi khi cập nhật số lượng:', error);
+      toast.error('Không thể cập nhật số lượng.');
     }
   };
 
-  // Hàm xóa sản phẩm khỏi giỏ hàng
   const handleRemoveItem = async (itemId) => {
     try {
-      // Tìm sản phẩm trong giỏ hàng trước khi xóa
       const existingItem = cartItems.find(item => item.medicine.medicine_id === itemId);
       if (!existingItem) {
         alert('Sản phẩm không tồn tại trong giỏ hàng.');
-        toast.error('❌ Sản phẩm không tồn tại trong giỏ hàng.');
+        toast.error('Sản phẩm không tồn tại trong giỏ hàng.');
         return;
       }
 
-      // Gọi API xóa sản phẩm
       await dispatch(deleteProductFromCartAPI({ itemId: existingItem.item_id })).unwrap();
 
-      // Cập nhật lại danh sách giỏ hàng sau khi xóa
       setCartItems(prev => prev.filter(item => item.medicine.medicine_id !== itemId));
       setQuantities(prev => {
         const newQuantities = { ...prev };
@@ -158,25 +145,21 @@ function CardPageManagement() {
         return newQuantities;
       });
 
-      // Thông báo xóa thành công
-      toast.success('✅ Sản phẩm đã được xóa khỏi giỏ hàng.');
-      alert('✅ Sản phẩm đã được xóa khỏi giỏ hàng.');
-      console.log(`🚀 ~ Xóa sản phẩm ID: ${itemId} thành công`);
+      toast.success('Sản phẩm đã được xóa khỏi giỏ hàng.');
+      alert('Sản phẩm đã được xóa khỏi giỏ hàng.');
     } catch (error) {
       console.error('Error removing item:', error);
 
-      // Phân loại lỗi
       if (error.response?.status === 404) {
-        toast.error('❌ Sản phẩm không tồn tại hoặc đã bị xóa.');
-        alert('❌ Sản phẩm không tồn tại hoặc đã bị xóa.');
+        toast.error('Sản phẩm không tồn tại hoặc đã bị xóa.');
+        alert('Sản phẩm không tồn tại hoặc đã bị xóa.');
       } else {
-        toast.error('❌ Lỗi khi xóa sản phẩm khỏi giỏ hàng.');
-        alert('❌ Lỗi khi xóa sản phẩm khỏi giỏ hàng.');
+        toast.error('Lỗi khi xóa sản phẩm khỏi giỏ hàng.');
+        alert(' Lỗi khi xóa sản phẩm khỏi giỏ hàng.');
       }
     }
   };
 
-  // 💲 Tính tổng tiền của giỏ hàng
   const totalAmount = cartItems.reduce((sum, item) => {
     return sum + item.medicine.price * (quantities[item.medicine.medicine_id] || 1);
   }, 0);

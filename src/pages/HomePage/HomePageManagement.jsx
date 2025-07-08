@@ -10,8 +10,8 @@ function HomePageManagement() {
       sx={{
         width: '100%',
         minHeight: '100vh',
-        overflowX: 'hidden', // tránh tràn ngang nếu có
-        backgroundColor: '#fff' // có thể tùy chỉnh nếu muốn
+        overflowX: 'hidden', 
+        backgroundColor: '#fff' 
       }}
     >
       <Hero />

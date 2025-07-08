@@ -6,14 +6,11 @@ import { ThemeProvider } from '@mui/material/styles'
 import theme from './theme'
 import './index.css'
 
-//React router dom
 import { BrowserRouter } from 'react-router-dom'
 
-//Redux store
 import { store } from '~/redux/stores.js'
 import { Provider } from 'react-redux'
 
-//Redux persist
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import LoadingProvider from './context/loading'

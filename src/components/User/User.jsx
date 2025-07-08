@@ -1,4 +1,3 @@
-// UserMenu.js
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User, LogOut, KeyRound } from "lucide-react";

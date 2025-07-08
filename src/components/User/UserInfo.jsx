@@ -1,4 +1,3 @@
-// UserInfo.js
 import { useUser } from "../User/UserContex";
 import { Link, useNavigate } from "react-router-dom";
 import AvatarUser from "./AvatarUser";
@@ -7,7 +6,6 @@ const UserInfo = () => {
   const { user, logout } = useUser();
   const navigate = useNavigate();
 
-  // Xử lý đăng xuất
   const handleLogout = () => {
     logout();
     navigate("/login");

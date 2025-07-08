@@ -74,15 +74,10 @@ function ProductsPageManagement() {
 
 
   const fetchData = async () => {
-    console.log('🚀 Đang gọi API lấy dữ liệu...');
     setIsLoading(true);
     try {
       const response = await getAllProductsAPI(page, 10);
-      console.log('✅ API Response:', response);
-
       if (response && Array.isArray(response.data)) {
-        console.log('🌟 Dữ liệu sản phẩm từ API:', response.data);
-
         const filteredProducts = response.data.filter((product) => {
           const price = parseFloat(product.price) || 0;
           const inCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category);
@@ -97,7 +92,7 @@ function ProductsPageManagement() {
         setTotalPages(calculatedTotalPages);
       }
     } catch (error) {
-      console.error('❌ Lỗi khi lấy dữ liệu sản phẩm:', error.message);
+      console.error(' Lỗi khi lấy dữ liệu sản phẩm:', error.message);
     } finally {
       setIsLoading(false);
     }
@@ -107,16 +102,13 @@ function ProductsPageManagement() {
   useEffect(() => {
     fetchData();
   }, [page, selectedCategories, priceRange, selectedRating]);
-
   const handleSearchKeyDown = (event) => {
     if (event.key === 'Enter') {
-      console.log('🔍 Nhấn Enter: Tìm kiếm với từ khóa:', searchQuery);
       fetchData();
       setSearchQuery('');
     }
   };
 
-  // Điều khiển chuyển trang
   const handleNextPage = () => {
     if (page < totalPages) setPage(page + 1);
   };
@@ -125,7 +117,6 @@ function ProductsPageManagement() {
     if (page > 1) setPage(page - 1);
   };
 
-  // Nội dung Drawer Lọc
   const filterDrawerContent = (
     <Box sx={{ width: 280, p: 3 }}>
       <Box sx={{ display: 'flex', gap: 2 }}>

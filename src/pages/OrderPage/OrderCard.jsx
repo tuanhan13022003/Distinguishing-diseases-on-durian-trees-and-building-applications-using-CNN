@@ -37,7 +37,6 @@ function OrderCard({ order, onOrderDeleted }) {
     dispatch(cancelOrderAPI(order.order_id))
       .unwrap()
       .then((res) => {
-        console.log('[SUCCESS] Huỷ đơn hàng:', res);
         alert('✅ Huỷ đơn hàng thành công.');
         if (onOrderDeleted) onOrderDeleted(order.order_id);
       })

@@ -49,9 +49,8 @@ function SearchProductsPageManagement() {
   const [priceRange, setPriceRange] = useState([0, 2000]);
   const [selectedRating, setSelectedRating] = useState(0);
   const [products, setProducts] = useState([]);
-  const [diseaseInfo, setDiseaseInfo] = useState(null); // Thông tin bệnh
+  const [diseaseInfo, setDiseaseInfo] = useState(null);
 
-  // Lấy kết quả từ Redux
   const currentProduct = useSelector(selectCurrentProduct);
 
   useEffect(() => {

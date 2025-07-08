@@ -5,7 +5,6 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  // Lấy thông tin từ localStorage khi khởi chạy
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -13,13 +12,11 @@ export const UserProvider = ({ children }) => {
     }
   }, []);
 
-  // Hàm đăng nhập
   const login = (userData) => {
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
   };
 
-  // Hàm đăng xuất
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
