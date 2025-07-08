@@ -1,12 +1,11 @@
 import { alpha, Button } from '@mui/material'
 import React from 'react'
 
-function ButtonContainedPrimary({ title, onClick }) {
+function ButtonContainedPrimary({ title, onClick, sx = {}, ...props }) {
   return (
     <Button
       variant="contained"
       onClick={onClick}
-      fullWidth
       sx={{
         borderRadius: '8px',
         padding: '10px 24px',
@@ -17,8 +16,10 @@ function ButtonContainedPrimary({ title, onClick }) {
         '&:hover': {
           backgroundColor: alpha('#73C7C7', 0.8),
           boxShadow: 'none'
-        }
+        },
+        ...sx 
       }}
+      {...props}
     >
       {title}
     </Button>

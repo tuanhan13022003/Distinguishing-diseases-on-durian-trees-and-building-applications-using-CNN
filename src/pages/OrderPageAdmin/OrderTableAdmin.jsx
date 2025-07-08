@@ -6,7 +6,7 @@ import {
 
 const OrderTableAdmin = ({ orders, onViewDetails }) => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10); // mặc định 10 dòng mỗi trang
+  const [rowsPerPage, setRowsPerPage] = useState(10); 
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -14,7 +14,7 @@ const OrderTableAdmin = ({ orders, onViewDetails }) => {
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0); // reset về trang đầu khi đổi số dòng/trang
+    setPage(0); 
   };
 
   const paginatedOrders = orders.slice(
@@ -44,7 +44,7 @@ const OrderTableAdmin = ({ orders, onViewDetails }) => {
                 <TableCell>{order.username}</TableCell>
                 <TableCell>{order.address}</TableCell>
                 <TableCell>{new Date(order.created_at).toLocaleString()}</TableCell>
-                <TableCell>{order.total_price} đ</TableCell>
+                <TableCell>{order.total_price} VND</TableCell>
                 <TableCell>{order.status}</TableCell>
                 <TableCell>
                   <Button size="small" onClick={() => onViewDetails(order)}>Xem</Button>

@@ -17,8 +17,8 @@ function OrderDetail({ details }) {
         >
           <Typography>Sản phẩm: {detail.medicine?.name || 'Không có tên'}</Typography>
           <Typography>Số lượng: {detail.quantity}</Typography>
-          <Typography>Giá: {detail.unit_price} $</Typography>
-          <Typography>Thành tiền: {detail.subtotal} $</Typography>
+          <Typography>Giá: {detail.unit_price} VND</Typography>
+          <Typography>Thành tiền: {detail.subtotal} VND</Typography>
           {detail.medicine?.image_base64 && (
             <img
               src={`data:image/jpeg;base64,${detail.medicine.image_base64}`}
@@ -29,7 +29,7 @@ function OrderDetail({ details }) {
           <Typography>Mô tả: {detail.medicine?.description || 'Không có mô tả'}</Typography>
           <Typography>Giá gốc: {detail.medicine?.price} $</Typography>
           {detail.medicine?.discounted_price && (
-            <Typography>Giá khuyến mãi: {detail.medicine.discounted_price} $</Typography>
+            <Typography>Giá khuyến mãi: {detail.medicine.discounted_price} VND</Typography>
           )}
           <Typography>Còn lại: {detail.medicine?.stock || 'Không xác định'}</Typography>
           <Typography>

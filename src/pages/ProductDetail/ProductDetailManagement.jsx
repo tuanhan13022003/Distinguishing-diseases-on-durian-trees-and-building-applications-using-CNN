@@ -20,7 +20,6 @@ import { selectCurrentUser } from '~/redux/user/userSlice';
 import { getProductByIdAPI, addToCartAPI } from '~/apis';
 import { useLoading } from '~/context';
 import authorizedAxiosInstance from '~/utils/authorizeAxios';
-// Quantity Selector Component
 const QuantitySelector = ({ quantity, setQuantity }) => (
   <Box
     sx={{
@@ -43,19 +42,18 @@ const QuantitySelector = ({ quantity, setQuantity }) => (
   </Box>
 );
 
-// Delivery Info Component
 const DeliveryInfo = () => (
   <Stack spacing={2}>
     {[
       {
         icon: <LocalShipping sx={{ color: 'primary.main', fontSize: 28 }} />,
-        title: 'Free Delivery',
-        text: 'Enter your postal code for Delivery Availability',
+        title: 'Miễn phí giao hàng',
+        text: 'Miễn phí cho các đơn hàng trong phạm vi TP.Hồ Chí Minh',
       },
       {
         icon: <Loop sx={{ color: 'primary.main', fontSize: 28 }} />,
-        title: 'Return Policy',
-        text: 'Free 30 Days Delivery Returns. Details',
+        title: 'Trả hàng',
+        text: 'Đổi trả hàng miễn phí 7 ngày khi chưa sử dụng',
       },
     ].map((info, index) => (
       <Paper key={index} elevation={3} sx={{ p: 2, display: 'flex', gap: 2, alignItems: 'center' }}>
@@ -95,8 +93,6 @@ function ProductDetailManagement() {
   };
   
 
-
-  // Fetch product details
   const fetchMedicineDetails = async (productId) => {
     try {
       setIsLoading(true);
@@ -226,7 +222,7 @@ const handleAddToCart = async () => {
             </Typography>
             <Rating value={4.5} readOnly />
             <Typography variant="h5" color="primary" gutterBottom>
-              ${medicine?.price}
+              {medicine?.price} VND
             </Typography>
             <Typography variant="body1" sx={{ mb: 2 }}>
               {medicine?.description}
@@ -237,7 +233,7 @@ const handleAddToCart = async () => {
                 variant="contained"
                 startIcon={<ShoppingCart />}
                 onClick={handleAddToCart}
-                sx={{ whiteSpace: 'nowrap' }}  // Đảm bảo nút không bị ngắt dòng
+                sx={{ whiteSpace: 'nowrap' }} 
               >
                 Thêm vào giỏ hàng
               </Button>

@@ -15,25 +15,28 @@ import {
 const OrderDetailDialogAdmin = ({ order, onClose, onUpdate }) => {
   const [status, setStatus] = useState(order?.status || '');
 
-  const handleUpdate = () => {
-    if (!order) return;
-    onUpdate(order.order_id, {
+  const handleUpdate = async () => {
+    await onUpdate(order.order_id, {
       user_id: order.user_id,
       status,
       delivery_date: order.delivery_date,
       total_price: order.total_price
     });
     onClose();
+    if (onStatusUpdated) onStatusUpdated(); // ✅ gọi callback nếu được truyền vào
   };
 
   if (!order) return null;
+
 
   return (
     <Dialog open={!!order} onClose={onClose} fullWidth>
       <DialogTitle>Chi tiết đơn hàng #{order.order_id}</DialogTitle>
       <DialogContent dividers>
         <Typography gutterBottom><strong>Người dùng:</strong> {order.user_id}</Typography>
-        <Typography gutterBottom><strong>Địa chỉ:</strong> {order.shipping_address}</Typography>
+        <Typography gutterBottom>
+  <strong>Địa chỉ:</strong> {order.address || order.shipping_address || order.user?.address || 'Không có'}
+</Typography>
         <Typography gutterBottom><strong>Ngày giao:</strong> {new Date(order.delivery_date).toLocaleString()}</Typography>
 
         <FormControl fullWidth margin="normal">
@@ -50,11 +53,14 @@ const OrderDetailDialogAdmin = ({ order, onClose, onUpdate }) => {
           </Select>
         </FormControl>
 
-        <Typography sx={{ mt: 2 }}><strong>Danh sách sản phẩm:</strong></Typography>
+
+        <Typography sx={{ mt: 2 }}>
+          <strong>Danh sách sản phẩm:</strong>
+        </Typography>
         <ul>
-          {order.details?.map((d) => (
-            <li key={d.detail_id}>
-              {d.medicine.name} - {d.quantity} x {d.unit_price} đ
+          {order.details?.map((d, index) => (
+            <li key={d.detail_id || index}>
+              {d.medicine?.name || d.medicine_name || 'Sản phẩm'} – {d.quantity} x {d.unit_price?.toLocaleString()} đ
             </li>
           ))}
         </ul>

@@ -55,7 +55,6 @@ function SearchButtonModalCustom({ isDisplayText = true }) {
     }
   })
 
-  // Xử lý khi chụp ảnh từ camera
   const handleCameraCapture = (event) => {
     const file = event.target.files[0]
     if (file) {
@@ -86,7 +85,6 @@ const sendToBackend = async () => {
     if (uploadedFiles.length > 0) {
       const file = uploadedFiles[0];
 
-      // Kiểm tra xem file có đúng là dạng File không
       if (!(file instanceof File)) {
         console.error("[ERROR] Tệp tin không đúng định dạng File");
         alert("Định dạng tệp không hợp lệ.");
@@ -97,7 +95,6 @@ const sendToBackend = async () => {
       const formData = new FormData();
       formData.append('file', file, file.name);
 
-      // Kiểm tra nội dung formData
       for (let pair of formData.entries()) {
         console.log(`[DEBUG] formData - ${pair[0]}: ${pair[1].name || pair[1]}`);
       }
@@ -253,9 +250,8 @@ const sendToBackend = async () => {
             )}
           </Box>
 
-          {/* Nút chụp ảnh từ camera */}
           <Box sx={{ textAlign: 'center', marginBottom: '20px' }}>
-            <Button
+            {/* <Button
               variant="outlined"
               startIcon={<CameraIcon />}
               component="label"
@@ -269,7 +265,7 @@ const sendToBackend = async () => {
                 onChange={handleCameraCapture}
                 style={{ display: 'none' }}
               />
-            </Button>
+            </Button> */}
           </Box>
 
           {uploadedFiles.length > 0 && (

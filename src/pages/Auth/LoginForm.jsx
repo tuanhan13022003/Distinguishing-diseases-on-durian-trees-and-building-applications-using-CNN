@@ -36,7 +36,7 @@ function LoginForm() {
 
     toast.promise(
       dispatch(loginUserAPI({ email, password })),
-      { pending: 'Logging in...' }
+      { pending: 'Đang đăng nhập...' }
     ).then((res) => {
       if (!res.error) navigate('/')
     })
@@ -45,7 +45,18 @@ function LoginForm() {
   return (
     <form onSubmit={handleSubmit(submitLogin)}>
       <Zoom in={true} style={{ transitionDelay: '200ms' }}>
-        <MuiCard sx={{ minWidth: 380, maxWidth: 380, marginTop: '6em' }}>
+        <MuiCard
+          sx={{
+            minWidth: 380,
+            maxWidth: 380,
+            backgroundColor: 'rgba(219, 220, 212, 0.46)', 
+            backdropFilter: 'blur(12px)', 
+            borderRadius: 2,
+            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+            border: '1px solid rgba(255, 255, 255, 0.18)'
+          }}
+        >
+
           <Box sx={{
             margin: '1em',
             display: 'flex',
@@ -61,7 +72,7 @@ function LoginForm() {
             justifyContent: 'center',
             color: theme => theme.palette.grey[500]
           }}>
-            
+
           </Box>
           <Box sx={{
             display: 'flex',
@@ -93,7 +104,7 @@ function LoginForm() {
               <TextField
                 autoFocus
                 fullWidth
-                label='Enter Email'
+                label='Nhập email'
                 type='text'
                 variant='outlined'
                 error={!!errors['email']}
@@ -111,7 +122,7 @@ function LoginForm() {
               <TextField
                 autoFocus
                 fullWidth
-                label='Enter Password'
+                label='Nhập mật khẩu'
                 type='password'
                 variant='outlined'
                 error={!!errors['password']}
@@ -135,13 +146,13 @@ function LoginForm() {
               size='large'
               fullWidth
             >
-              Login
+              Đăng nhập
             </Button>
           </CardActions>
           <Box sx={{ padding: '0em 1em 1em 1em', textAlign: 'center' }}>
             <Link to='/register'>
-              <Typography sx={ { color: 'primary.main', '&:hover': { color: '#ffbb39' } }}>
-                Create an account!
+              <Typography sx={{  '&:hover': { color: '#ffbb39' } }}>
+                Tạo tài khoản!
               </Typography>
             </Link>
           </Box>
@@ -152,126 +163,3 @@ function LoginForm() {
 }
 
 export default LoginForm
-
-
-
-// import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
-// import Avatar from '@mui/material/Avatar';
-// import LockIcon from '@mui/icons-material/Lock';
-// import Typography from '@mui/material/Typography';
-// import { Card as MuiCard } from '@mui/material';
-// import CardActions from '@mui/material/CardActions';
-// import TextField from '@mui/material/TextField';
-// import Zoom from '@mui/material/Zoom';
-// import Alert from '@mui/material/Alert';
-// import { useForm } from 'react-hook-form';
-// import FieldErrorAlert from '~/components/Form/FieldErrorAlert';
-// import { Link, useSearchParams, useNavigate } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { loginUserAPI, selectLoading, selectError } from '~/redux/user/userSlice';
-// import { toast } from 'react-toastify';
-
-// function LoginForm() {
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-//   const loading = useSelector(selectLoading);
-//   const error = useSelector(selectError);
-
-//   const { register, handleSubmit, formState: { errors } } = useForm();
-//   const [searchParams] = useSearchParams();
-//   const { verifiedEmail, registeredEmail } = Object.fromEntries([...searchParams]);
-
-//   const submitLogin = async (data) => {
-//     const { username, password } = data;
-//     try {
-//       const result = await dispatch(loginUserAPI({ username, password }));
-//       if (!result.error) {
-//         toast.success('Đăng nhập thành công!');
-//         navigate('/');
-//       } else {
-//         toast.error(result.error.message || 'Đăng nhập thất bại.');
-//       }
-//     } catch (err) {
-//       toast.error('Lỗi hệ thống. Vui lòng thử lại.');
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit(submitLogin)}>
-//       <Zoom in={true} style={{ transitionDelay: '200ms' }}>
-//         <MuiCard sx={{ minWidth: 380, maxWidth: 380, marginTop: '6em', padding: '1em' }}>
-//           <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, marginBottom: '1em' }}>
-//             <Avatar sx={{ bgcolor: 'primary.main' }}><LockIcon /></Avatar>
-//             <Typography variant="h5" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-//               Đăng nhập
-//             </Typography>
-//           </Box>
-
-//           <Box sx={{ padding: '0 1em 1em 1em' }}>
-//             {error && (
-//               <Alert severity='error' sx={{ marginBottom: '1em' }}>
-//                 {error}
-//               </Alert>
-//             )}
-//             {verifiedEmail && (
-//               <Alert severity='success' sx={{ marginBottom: '1em' }}>
-//                 Email {verifiedEmail} đã được xác minh! Vui lòng đăng nhập.
-//               </Alert>
-//             )}
-//             {registeredEmail && (
-//               <Alert severity='info' sx={{ marginBottom: '1em' }}>
-//                 Vui lòng kiểm tra email {registeredEmail} để xác minh tài khoản.
-//               </Alert>
-//             )}
-
-//             <TextField
-//               fullWidth
-//               label='Username'
-//               variant='outlined'
-//               error={!!errors['username']}
-//               helperText={errors['username'] ? errors['username'].message : ''}
-//               {...register('username', { required: 'Vui lòng nhập tên đăng nhập' })}
-//               sx={{ marginBottom: '1em' }}
-//             />
-
-//             <TextField
-//               fullWidth
-//               label='Password'
-//               type='password'
-//               variant='outlined'
-//               error={!!errors['password']}
-//               helperText={errors['password'] ? errors['password'].message : ''}
-//               {...register('password', { required: 'Vui lòng nhập mật khẩu' })}
-//               sx={{ marginBottom: '1em' }}
-//             />
-
-//             <CardActions>
-//               <Button
-//                 className='interceptor-loading'
-//                 type='submit'
-//                 variant='contained'
-//                 color='primary'
-//                 size='large'
-//                 fullWidth
-//                 disabled={loading}
-//               >
-//                 {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
-//               </Button>
-//             </CardActions>
-
-//             <Box sx={{ padding: '1em', textAlign: 'center' }}>
-//               <Link to='/register'>
-//                 <Typography sx={{ color: 'primary.main', '&:hover': { color: '#ffbb39' } }}>
-//                   Tạo tài khoản mới
-//                 </Typography>
-//               </Link>
-//             </Box>
-//           </Box>
-//         </MuiCard>
-//       </Zoom>
-//     </form>
-//   );
-// }
-
-// export default LoginForm;

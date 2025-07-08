@@ -63,7 +63,7 @@ const Hero = () => {
     <Box
       sx={{
         width: '100%',
-        px: { xs: 1, sm: 2, md: 15 }, // padding ngang linh hoạt theo kích thước màn hình
+        px: { xs: 1, sm: 2, md: 15 }, 
         py: 2,
       }}
     >
@@ -84,8 +84,8 @@ const Hero = () => {
               src={slide.src}
               alt={slide.alt}
               sx={{
-                width: '100%',
-                height: { xs: 220, sm: 350, md: 630 }, // Chiều cao linh hoạt theo kích thước màn hình
+                width: '50%',
+                height: { xs: 260, sm: 320, md: 480 },
                 objectFit: 'cover',
                 borderRadius: 3,
               }}

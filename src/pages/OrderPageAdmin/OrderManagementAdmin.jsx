@@ -24,6 +24,7 @@ export default function OrderManagementAdmin() {
 
   useEffect(() => {
     dispatch(getAllOrdersAdminAPI());
+    
   }, [dispatch]);
 
   useEffect(() => {
@@ -34,9 +35,12 @@ export default function OrderManagementAdmin() {
     }
   }, [searchId, orders]);
 
-  const handleUpdate = (orderId, updatedData) => {
-    dispatch(updateOrderAPI({ orderId, data: updatedData }));
-  };
+const handleUpdate = (orderId, updatedData) => {
+  dispatch(updateOrderAPI({ orderId, data: updatedData }))
+    .then(() => {
+      dispatch(getAllOrdersAdminAPI()); 
+    });
+};
 
   return (
     <Container maxWidth="lg" sx={{marginTop: 3}}>
@@ -56,12 +60,15 @@ export default function OrderManagementAdmin() {
       ) : (
         <OrderTableAdmin orders={filteredOrders} onViewDetails={setSelectedOrder} />
       )}
-
       <OrderDetailDialogAdmin
-        order={selectedOrder}
-        onClose={() => setSelectedOrder(null)}
-        onUpdate={handleUpdate}
-      />
+  order={selectedOrder}
+  onClose={() => setSelectedOrder(null)}
+  onUpdate={handleUpdate}
+/>
+
+
+
+      
     </Container>
   );
 }

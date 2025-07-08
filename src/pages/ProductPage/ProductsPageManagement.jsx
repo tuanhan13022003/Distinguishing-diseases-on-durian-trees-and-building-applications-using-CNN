@@ -21,7 +21,6 @@ import CardProduct from '~/components/Card/CardProduct'
 
 const categories = ['Bệnh Rầy Nhảy', 'Bệnh Cháy Lá']
 
-// Hàm định dạng dữ liệu sản phẩm
 const formatData = (data) => {
   if (!data || !Array.isArray(data)) {
     console.error('Dữ liệu không hợp lệ:', data);
@@ -59,7 +58,6 @@ function ProductsPageManagement() {
   const { setIsLoading } = useLoading();
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Xử lý thay đổi thể loại
   const handleCategoryChange = (category) => {
     setSelectedCategories((prev) =>
       prev.includes(category)
@@ -79,7 +77,6 @@ function ProductsPageManagement() {
     console.log('🚀 Đang gọi API lấy dữ liệu...');
     setIsLoading(true);
     try {
-      // Gọi API mà không cần tự truyền token (do đã cấu hình Axios Interceptors)
       const response = await getAllProductsAPI(page, 10);
       console.log('✅ API Response:', response);
 
@@ -159,7 +156,7 @@ function ProductsPageManagement() {
           step={100}
         />
       </Box>
-      <Divider sx={{ my: 2 }} />
+      {/* <Divider sx={{ my: 2 }} />
       <Typography variant="h6" gutterBottom>Lọc</Typography>
       <Box sx={{ mb: 3 }}>
         <Typography variant="subtitle1" gutterBottom>Thể Loại</Typography>
@@ -179,7 +176,7 @@ function ProductsPageManagement() {
             </ListItem>
           ))}
         </List>
-      </Box>
+      </Box> */}
     </Box>
   );
 
@@ -208,19 +205,20 @@ function ProductsPageManagement() {
           <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold' }}>
             Danh sách thuốc
           </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3, mr:  7 }}>
-          <Button onClick={handlePrevPage} disabled={page === 1}>◀</Button>
-          <Typography sx={{  mt:0.8}}>{page} / {totalPages}</Typography>
-          <Button onClick={handleNextPage} disabled={page === totalPages}>▶</Button>
+          
         </Box>
-        </Box>
-        <Grid2 container spacing={3} sx={{ mx: '30px', gap: '50px' }}>
+        <Grid2 container spacing={4} sx={{ ml: '10px' , mr:'0px', gap: '50px' }}>
           {medicines.map((medicine) => (
             <Grid2 item xs={12} sm={6} md={4} key={medicine.id}>
               <CardProduct product={medicine} />
             </Grid2>
           ))}
         </Grid2>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3, mr:  7 }}>
+          <Button onClick={handlePrevPage} disabled={page === 1}>◀</Button>
+          <Typography sx={{  mt:0.8}}>{page} / {totalPages}</Typography>
+          <Button onClick={handleNextPage} disabled={page === totalPages}>▶</Button>
+        </Box>
         
       </Box>
     </Box>

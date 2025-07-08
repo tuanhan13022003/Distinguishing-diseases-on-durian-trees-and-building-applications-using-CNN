@@ -1,60 +1,112 @@
 import React from 'react';
-import { Container, Typography, Box, Button } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Box,
+  Button,
+  Divider
+} from '@mui/material';
+import { motion } from 'framer-motion';
+import BrandingImage from '~/assets/auth/login-register-bg.png'; 
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 1) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.6
+    }
+  })
+};
 
 const AboutPage = () => {
   return (
-    <Container maxWidth="md" style={{ padding: '40px 20px', fontFamily: 'Roboto, sans-serif' }}>
-      <Typography variant="h3" align="center" gutterBottom style={{ color: '#2E7D32', fontWeight: 'bold' }}>
-        Về Bệnh viện Sầu Riêng
-      </Typography>
-
-      <Box my={4}>
-        <Typography variant="h5" gutterBottom style={{ color: '#388E3C' }}>
-          Sứ mệnh của chúng tôi
+    <Container maxWidth="md" sx={{ py: 6 }}>
+      <Box
+        component={motion.div}
+        initial="hidden"
+        animate="visible"
+        variants={fadeIn}
+        sx={{
+          textAlign: 'center',
+          mb: 4
+        }}
+      >
+        <img
+          src={BrandingImage}
+          alt="Logo bệnh viện sầu riêng"
+          style={{ width: 120, borderRadius: 12 }}
+        />
+        <Typography variant="h3" sx={{ fontWeight: 'bold', color: '#2E7D32', mt: 2 }}>
+          Bệnh viện Sầu Riêng
         </Typography>
-        <Typography variant="body1" paragraph>
-          Bệnh viện Sầu Riêng là đơn vị tiên phong trong việc nghiên cứu và cung cấp các giải pháp chăm sóc sức khỏe cho cây sầu riêng. Chúng tôi cam kết mang đến các loại thuốc chất lượng cao để điều trị các bệnh thường gặp ở cây sầu riêng, đồng thời ứng dụng công nghệ AI hiện đại để hỗ trợ nông dân chẩn đoán bệnh nhanh chóng và hiệu quả.
-        </Typography>
-      </Box>
-
-      <Box my={4}>
-        <Typography variant="h5" gutterBottom style={{ color: '#388E3C' }}>
-          Dịch vụ của chúng tôi
-        </Typography>
-        <Typography variant="body1" paragraph>
-          - <strong>Cung cấp thuốc chữa bệnh sầu riêng:</strong> Chúng tôi sản xuất và phân phối các loại thuốc chuyên dụng để điều trị các bệnh như rầy phấn, nhện đỏ, sâu đục thân, và các bệnh nấm phổ biến trên cây sầu riêng. Tất cả sản phẩm đều được kiểm nghiệm kỹ lưỡng để đảm bảo an toàn và hiệu quả.
-        </Typography>
-        <Typography variant="body1" paragraph>
-          - <strong>Chẩn đoán bệnh bằng AI:</strong> Sử dụng công nghệ nhận diện hình ảnh tiên tiến, hệ thống AI của chúng tôi có thể phân tích hình ảnh lá, thân, và quả sầu riêng để xác định bệnh. Sau khi chẩn đoán, hệ thống sẽ đề xuất loại thuốc phù hợp và hướng dẫn sử dụng chi tiết, giúp nông dân tiết kiệm thời gian và nâng cao năng suất.
+        <Typography variant="subtitle1" sx={{ color: 'text.secondary', mt: 1 }}>
+          Kết nối công nghệ và nông nghiệp, chăm sóc cây sầu riêng bằng trái tim 💚
         </Typography>
       </Box>
 
-      <Box my={4}>
-        <Typography variant="h5" gutterBottom style={{ color: '#388E3C' }}>
-          Tại sao chọn chúng tôi?
-        </Typography>
-        <Typography variant="body1" paragraph>
-          - Đội ngũ chuyên gia hàng đầu về nông nghiệp và công nghệ AI.<br />
-          - Sản phẩm thuốc đạt tiêu chuẩn an toàn, thân thiện với môi trường.<br />
-          - Công nghệ AI nhận diện bệnh với độ chính xác cao, hỗ trợ nông dân 24/7.<br />
-          - Dịch vụ tư vấn tận tâm, đồng hành cùng nông dân trong suốt quá trình canh tác.
-        </Typography>
-      </Box>
+      <Divider sx={{ mb: 4 }} />
 
-      <Box my={4}>
-        <Typography variant="h5" gutterBottom style={{ color: '#388E3C' }}>
-          Liên hệ với chúng tôi
-        </Typography>
-        <Typography variant="body1" paragraph>
-          Địa chỉ: 123 Đường Sầu Riêng, Quận Nông Nghiệp, TP. Hồ Chí Minh<br />
-          Email: info@benhviensaurieng.vn<br />
-          Hotline: 0909 123 456<br />
-          Website: www.benhviensaurieng.vn
-        </Typography>
-        <Button variant="contained" color="primary" href="mailto:info@benhviensaurieng.vn">
-          Gửi email cho chúng tôi
-        </Button>
-      </Box>
+      {/* Sứ mệnh */}
+      <motion.div variants={fadeIn} custom={1} initial="hidden" whileInView="visible">
+        <Box mb={4}>
+          <Typography variant="h5" sx={{ color: '#388E3C', fontWeight: 600 }}>
+            🌱 Sứ mệnh của chúng tôi
+          </Typography>
+          <Typography variant="body1" sx={{ mt: 1 }}>
+            Bệnh viện Sầu Riêng là đơn vị tiên phong trong việc nghiên cứu và cung cấp các giải pháp chăm sóc cây sầu riêng. Chúng tôi mang đến các loại thuốc chất lượng cao và ứng dụng AI để hỗ trợ nông dân chẩn đoán bệnh hiệu quả và chính xác.
+          </Typography>
+        </Box>
+      </motion.div>
+
+      <motion.div variants={fadeIn} custom={2} initial="hidden" whileInView="visible">
+        <Box mb={4}>
+          <Typography variant="h5" sx={{ color: '#388E3C', fontWeight: 600 }}>
+            💼 Dịch vụ của chúng tôi
+          </Typography>
+          <Typography variant="body1" sx={{ mt: 1 }}>
+            • <strong>Thuốc đặc trị:</strong> Trị các bệnh như rầy phấn, nhện đỏ, sâu đục thân, nấm lá…<br />
+            • <strong>Chẩn đoán bằng AI:</strong> Nhận diện bệnh qua hình ảnh lá, thân, quả và đề xuất giải pháp phù hợp.
+          </Typography>
+        </Box>
+      </motion.div>
+
+      <motion.div variants={fadeIn} custom={3} initial="hidden" whileInView="visible">
+        <Box mb={4}>
+          <Typography variant="h5" sx={{ color: '#388E3C', fontWeight: 600 }}>
+            🤝 Vì sao chọn chúng tôi?
+          </Typography>
+          <Typography variant="body1" sx={{ mt: 1 }}>
+            • Đội ngũ chuyên gia AI và nông nghiệp hàng đầu.<br />
+            • Sản phẩm đạt chuẩn, thân thiện môi trường.<br />
+            • Chẩn đoán nhanh chóng 24/7.<br />
+            • Hỗ trợ kỹ thuật & đồng hành cùng nông dân.
+          </Typography>
+        </Box>
+      </motion.div>
+
+      <motion.div variants={fadeIn} custom={4} initial="hidden" whileInView="visible">
+        <Box textAlign="center" mt={6}>
+          <Typography variant="h5" sx={{ color: '#388E3C', fontWeight: 600 }}>
+            📞 Liên hệ với chúng tôi
+          </Typography>
+          <Typography variant="body1" sx={{ mt: 1 }}>
+            140 Đường Lê Trọng Tấn, Quận Tân Phú, TP. HCM<br />
+            📧 info@benhviensaurieng.vn<br />
+            ☎️ 0909 123 456
+          </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+            href="mailto:info@benhviensaurieng.vn"
+          >
+            Gửi email cho chúng tôi
+          </Button>
+        </Box>
+      </motion.div>
     </Container>
   );
 };

@@ -18,19 +18,26 @@ function Auth() {
   }
 
   return (
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100vh',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      background: 'url(src/assets/auth/login-register-bg.png)',
-      backgroundPosition: 'center',
-      boxShadow: 'inset 0 0 0 2000px rgba(0, 0, 0, 0.2)'
-    }}>
-      {isLogin && <LoginForm />}
-      {isRegister && <RegisterForm />}
-    </Box>
+    <Box
+  sx={{
+    minHeight: '100vh',
+    width: '100%',
+    backgroundImage: 'url(src/assets/auth/login-register-bg.png)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+
+  }}
+>
+  <Box sx={{ zIndex: 1 }}>
+    {isLogin && <LoginForm />}
+    {isRegister && <RegisterForm />}
+  </Box>
+</Box>
+
   )
 }
 
